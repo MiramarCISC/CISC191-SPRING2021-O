@@ -5,9 +5,9 @@ import edu.sdccd.cisc191.o.UI;
 import java.util.Scanner;
 
 public class App {
-    private UI appUI;
+    //private UI appUI;
 
-    //FIX ME: GUI implementation, networking
+
 
     /**
      * Method creates a new User called app User, sends it to Server to be stored on Server
@@ -61,7 +61,7 @@ public class App {
         //in Server, search for matching username, then check if passwords match
     }
 
-    //FIX ME: modify main() with GUI elements
+
     //main()
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
