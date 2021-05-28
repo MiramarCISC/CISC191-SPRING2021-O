@@ -41,28 +41,20 @@ public class DailyLog implements Comparator<DailyLog> {
         return objectMapper.readValue(input, DailyLog.class);
     }
 
-    public void searchFoods(){
-        dailyCalories = 0; //use Food class methods to calculate
-        for (String food: enteredFoods) {
-            dailyCalories += Food.calculateCaloriesForFood(food);
+    public void searchFoods(String input){
+        try {
+            Database loadFile = new Database();
+            int calories = loadFile.searchFood(input);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-    }
-    public void searchByIngredients(){
-        dailyCalories = 0; //use Ingredient class methods to calculate
-        for (String ingredient: enteredIngredients.keySet()) {
-            dailyCalories += Ingredient.calculateCaloriesForIngredient(ingredient,enteredIngredients.get(ingredient));
-        }
     }
     public int getDailyCalories(){
         //if its foods use searchFoods() and return dailyCalories
         //else
         //use ingredients use searchByIngredients() and return dailyCalories
-        if(enteredFoods.isEmpty()){
-            searchByIngredients();
-        }else{
-            searchFoods();
-        }
+       
         return dailyCalories;
     }
 
