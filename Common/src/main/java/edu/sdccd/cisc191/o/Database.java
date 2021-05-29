@@ -8,10 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class Database {
 
     private final Map<String, List<Integer>> foods;
-    private final static String NUTRITION_FILE = "nutrition.csv";
+    private final static String NUTRITION_FILE = "Common/src/nutrition.csv";
 
     /**
      * @throws FileNotFoundException

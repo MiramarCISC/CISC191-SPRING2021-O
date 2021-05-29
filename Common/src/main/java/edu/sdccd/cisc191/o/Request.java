@@ -8,12 +8,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * Also contains a method to deserialize a JSON serialized object
  */
 public class Request {
-    private Integer logEntryDay;
+    private String userName;
 
     @JsonIgnore
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    public static String toJSON(Request log) throws Exception {
-        return objectMapper.writeValueAsString(log);
+    public static String toJSON(Request user) throws Exception {
+        return objectMapper.writeValueAsString(user);
     }
     public static Request fromJSON(String input) throws Exception{
         return objectMapper.readValue(input, Request.class);
@@ -21,17 +21,17 @@ public class Request {
     protected Request(){
 
     }
-    public Request(Integer logEntryDay) {
-        this.logEntryDay = logEntryDay;
+    public Request(String username) {
+        this.userName = username;
     }
 
-    public Integer getLogEntryDay(){
-        return logEntryDay;
+    public String getLogEntryDay(){
+        return userName;
     }
 
     @Override
     public String toString() {
-        return String.format("Day[%d] ", logEntryDay);
+        return String.format("User -  ", userName);
     }
 
 

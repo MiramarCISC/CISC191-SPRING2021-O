@@ -2,68 +2,60 @@ package edu.sdccd.cisc191.o;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import  edu.sdccd.cisc191.o.Food;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.time.LocalDate;
 
 /**
+ * Author - Sasanka P.
+ * Co-Authors -  Alex Nguyen & Andrew Wilson
+ *
+ *
  * This class is used to create an object DailyLog
  * The class also includes methods to JSON serialize an object of DailyLog
  * Likewise, it also has a method to deserialize a JSON serialized DailyLog object
  *
  */
-public class DailyLog implements Comparator<DailyLog> {
-    LocalDate logDate;
+public class DailyLog {
+    private int logEntryNum;
+    private LocalDate logDate;
     private int dailyCalories = 0;
-    HashMap<String, Double> enteredIngredients; //String or Ingredient?
     ArrayList<String> enteredFoods;       //String or Food?
 
     //Default constructor
     public DailyLog() {
         this.logDate = LocalDate.now();
         this.dailyCalories = 0;
-        this.enteredIngredients = null;
         this.enteredFoods = null;
     }
 
     //Constructor
-    public DailyLog(LocalDate logDate, int dailyCalories, HashMap<String, Double> enteredIngredients, ArrayList<String> enteredFoods) {
+    public DailyLog(LocalDate logDate, ArrayList<String> enteredFoods) {
         this.logDate = logDate;
-        this.dailyCalories = dailyCalories;
-        this.enteredIngredients = enteredIngredients;
+        this.dailyCalories = 0;
         this.enteredFoods = enteredFoods;
+
+        for(String food: enteredFoods){
+            searchFoods(food);
+        }
     }
 
 
-
-    @JsonIgnore
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-    public static String toJSON(DailyLog log) throws Exception {
-        return objectMapper.writeValueAsString(log);
-    }
-    public static DailyLog fromJSON(String input) throws Exception{
-        return objectMapper.readValue(input, DailyLog.class);
-    }
 
     public void searchFoods(String input){
         try {
             Database loadFile = new Database();
             int calories = loadFile.searchFood(input);
+            dailyCalories += calories;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
     public int getDailyCalories(){
-        //if its foods use searchFoods() and return dailyCalories
-        //else
-        //use ingredients use searchByIngredients() and return dailyCalories
-       
         return dailyCalories;
     }
 
@@ -71,29 +63,30 @@ public class DailyLog implements Comparator<DailyLog> {
         return logDate;
     }
 
-    public void setLogDate(LocalDate logDate) {
-        this.logDate = logDate;
+    public void setLogEntryNum(int entry) {
+        this.logEntryNum = entry;
+    }
+
+    public int getLogEntryNum() {
+        return logEntryNum;
     }
 
     public void setDailyCalories(int dailyCalories) {
         this.dailyCalories = dailyCalories;
     }
 
-    public void setEnteredIngredients(HashMap<String, Double> enteredIngredients) {
-        this.enteredIngredients = enteredIngredients;
-    }
 
     public void setEnteredFoods(ArrayList<String> enteredFoods) {
         this.enteredFoods = enteredFoods;
+
+        for(String food: enteredFoods){
+            searchFoods(food);
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("Daily Calorie amount is %d because you starved today",dailyCalories);
+        return String.format("Daily Calorie amount is %d on %s",dailyCalories, getLogDate());
     }
 
-    @Override
-    public int compare(DailyLog log1, DailyLog log2) {
-        return Integer.compare(log1.getDailyCalories(), log2.getDailyCalories());
-    }
 }
