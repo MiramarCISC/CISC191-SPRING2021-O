@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import  edu.sdccd.cisc191.o.Food;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,14 +23,22 @@ public class DailyLog implements Comparator<DailyLog> {
     HashMap<String, Double> enteredIngredients; //String or Ingredient?
     ArrayList<String> enteredFoods;       //String or Food?
 
-    /*
+    //Default constructor
+    public DailyLog() {
+        this.logDate = LocalDate.now();
+        this.dailyCalories = 0;
+        this.enteredIngredients = null;
+        this.enteredFoods = null;
+    }
+
+    //Constructor
     public DailyLog(LocalDate logDate, int dailyCalories, HashMap<String, Double> enteredIngredients, ArrayList<String> enteredFoods) {
         this.logDate = logDate;
         this.dailyCalories = dailyCalories;
         this.enteredIngredients = enteredIngredients;
         this.enteredFoods = enteredFoods;
     }
-    */
+
 
 
     @JsonIgnore
