@@ -12,6 +12,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * Author - Sasanka Pallek
+ *
+ * This class is used to store User objects/accounts.
+ * User objects are received to be stored or sent back to the app when logging in
+ * //Not complete
+ */
 public class Accounts {
 
     private ArrayList<User> userAccounts = new ArrayList<>();

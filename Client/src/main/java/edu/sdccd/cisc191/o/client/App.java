@@ -11,6 +11,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Author - Neema Adelinia
+ * Co -
+ * The UI and Accounts server is integrated together. Once a user has been retrieved from Accounts server,
+ * the UI and User classes interact with one another to provide a user of the app to access User class's features.
+ */
 public class App {
     private Socket clientSocket;
     private PrintWriter out;
@@ -125,17 +131,19 @@ public class App {
 
     //main()
     public static void main(String[] args) {
+
         Scanner keyboard = new Scanner(System.in);
         App calorieApp = new App();
         try {
             calorieApp.startConnection("127.0.0.1", 8888);
-            signIn(keyboard, calorieApp);
+            signIn(keyboard, calorieApp); //signing is not complete / serialization errors
             calorieApp.logout();
         } catch(Exception e) {
             e.printStackTrace();
         }
 
-        //for demonstration
+
+        //for demonstration creating new user and interacting
         User newUser = calorieApp.createUser(keyboard);
 
 

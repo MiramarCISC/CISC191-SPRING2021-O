@@ -8,7 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Author - Andrew Wilson
+ *
+ * The class is responsible for reading and storing the data found in the Nutrition.csv file in a  hashmap.
+ * Also has the ability to look up the corresponding calorie value for a certain Food.
+ */
 public class Database {
 
     private final Map<String, List<Integer>> foods;
