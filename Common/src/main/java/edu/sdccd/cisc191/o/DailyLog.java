@@ -79,6 +79,14 @@ public class DailyLog implements Comparator<DailyLog> {
         this.dailyCalories = dailyCalories;
     }
 
+    public void setEnteredIngredients(HashMap<String, Double> enteredIngredients) {
+        this.enteredIngredients = enteredIngredients;
+    }
+
+    public void setEnteredFoods(ArrayList<String> enteredFoods) {
+        this.enteredFoods = enteredFoods;
+    }
+
     @Override
     public String toString() {
         return String.format("Daily Calorie amount is %d because you starved today",dailyCalories);
